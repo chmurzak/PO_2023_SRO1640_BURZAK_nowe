@@ -1,24 +1,23 @@
 package agh.ics.oop;
 
-//import agh.ics.oop.model.MapDirection;
+import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
-//import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.Vector2d;
 
 public class World{
     public static void main(String[] args){
-//        Vector2d position1 = new Vector2d(1,2);
-//        System.out.println(position1);
-//        Vector2d position2 = new Vector2d(-2,1);
-//        System.out.println(position2);
-//        System.out.println(position1.add(position2));
-//        System.out.println(MapDirection.EAST);
-//        System.out.println(MapDirection.EAST.next());
-//        System.out.println(MapDirection.NORTH.previous());
-//        System.out.println(MapDirection.NORTH.toUnitVector());
-
         System.out.println("System wystartowal");
         MoveDirection[] parsedArgs = OptionsParser.parse(args);
         run(parsedArgs);
+        Vector2d position1 = new Vector2d(1,2);
+        System.out.println(position1);
+        Vector2d position2 = new Vector2d(-2,1);
+        System.out.println(position2);
+        System.out.println(position1.add(position2));
+        System.out.println(MapDirection.EAST);
+        System.out.println(MapDirection.EAST.next());
+        System.out.println(MapDirection.NORTH.previous());
+        System.out.println(MapDirection.NORTH.toUnitVector());
         System.out.println("System zakonczyl dzialanie");
     }
 
