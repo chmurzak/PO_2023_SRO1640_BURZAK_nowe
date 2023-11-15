@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class OptionsParserTest {
     @Test
     void testParse(){
@@ -13,7 +17,7 @@ class OptionsParserTest {
         MoveDirection[] expectedDirections = {
                 MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.RIGHT, MoveDirection.LEFT
         };
-
-        assertArrayEquals(expectedDirections, OptionsParser.parse(args));
+        List<MoveDirection> expectedDirectionsList = Arrays.asList(expectedDirections);
+        assertIterableEquals(expectedDirectionsList, OptionsParser.parse(args));
     }
 }

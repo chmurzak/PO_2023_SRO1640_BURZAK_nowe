@@ -32,7 +32,7 @@ class Vector2dTest {
         Vector2d vector1 = new Vector2d(3,4);
         Vector2d vector2 = new Vector2d(5,1);
 
-        Vector2d vector3 = vector1.substract(vector2);
+        Vector2d vector3 = vector1.subtract(vector2);
 
         assertEquals(-2,vector3.getX());
         assertEquals(3,vector3.getY());

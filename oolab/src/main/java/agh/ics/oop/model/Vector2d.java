@@ -20,8 +20,7 @@ public class Vector2d {
 
     @Override
     public String toString() {
-
-        return "(" + x + "," + y + ")";
+        return String.format("(%d, %d)", x, y);
     }
 
     public boolean precedes(Vector2d other) {
@@ -40,7 +39,7 @@ public class Vector2d {
         return new Vector2d(newX, newY);
     }
 
-    public Vector2d substract(Vector2d other) {
+    public Vector2d subtract(Vector2d other) {
         int newX = this.x - other.x;
         int newY = this.y - other.y;
         return new Vector2d(newX, newY);
