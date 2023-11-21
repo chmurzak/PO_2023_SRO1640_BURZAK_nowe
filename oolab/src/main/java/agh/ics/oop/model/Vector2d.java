@@ -74,7 +74,8 @@ public class Vector2d {
         return x == vector2d.x && y == vector2d.y;
     }
 
+    @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(this.x, this.y);
     }
 }
