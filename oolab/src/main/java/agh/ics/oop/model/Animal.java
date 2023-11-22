@@ -4,7 +4,15 @@ import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 
+import javax.swing.text.Position;
+import java.util.Objects;
+
 public class Animal {
+
+    public static final Vector2d LOW_BOUNDARY = new Vector2d(0,0);
+
+    public static final Vector2d UP_BOUNDARY = new Vector2d(4, 4);
+
     private Vector2d position;
     private MapDirection orientation;
 
@@ -16,8 +24,7 @@ public class Animal {
     }
 
     public Animal() {
-        this.orientation = MapDirection.NORTH;
-        this.position = new Vector2d(2, 2);
+        this(new Vector2d(2, 2));
     }
 
     public Animal(Vector2d position) {
@@ -27,30 +34,28 @@ public class Animal {
 
     @Override
     public String toString() {
-        return String.format("Orientacja zwierzaka: %s\nPozycja zwierzaka: %s", orientation, position);
+        return orientation.toSymbol();
     }
 
     public boolean isAt(Vector2d position) {
-        return this.position.equals(position);
+        return Objects.equals(this.position, position);
     }
 
-    public void move(MoveDirection direction) {
-        switch (direction) {
-            case RIGHT -> this.orientation = this.orientation.next();
-            case LEFT -> this.orientation = this.orientation.previous();
-            case FORWARD -> {
-                Vector2d newPositionF = this.position.add(this.orientation.toUnitVector());
-                if(0<=newPositionF.getX() && newPositionF.getX()<=4 && 0<=newPositionF.getY() && newPositionF.getY()<=4){
-                    this.position = newPositionF;
-                }
-            }
-            case BACKWARD -> {
-                Vector2d newPositionB = this.position.subtract(this.orientation.toUnitVector());
-                if(0<=newPositionB.getX() && newPositionB.getX()<=4 && 0<=newPositionB.getY() && newPositionB.getY()<=4){
-                    System.out.println(newPositionB);
-                    this.position = newPositionB;
-                }
-            }
+    public void move(MoveDirection direction, MoveValidator validator) {
+        orientation = switch (direction) {
+            case RIGHT -> orientation.next();
+            case LEFT -> orientation.previous();
+            case FORWARD, BACKWARD -> orientation;
+        };
+
+        Vector2d newPosition = switch (direction) {
+            case FORWARD -> position.add(orientation.toUnitVector());
+            case BACKWARD -> position.subtract(orientation.toUnitVector());
+            case LEFT, RIGHT -> position;
+        };
+
+        if(validator.canMoveTo(newPosition)){
+            this.position = newPosition;
         }
     }
 }
