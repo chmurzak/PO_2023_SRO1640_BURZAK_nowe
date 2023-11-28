@@ -7,7 +7,7 @@ import agh.ics.oop.model.MoveDirection;
 import javax.swing.text.Position;
 import java.util.Objects;
 
-public class Animal {
+public class Animal implements WorldElement {
 
     public static final Vector2d LOW_BOUNDARY = new Vector2d(0,0);
 
